@@ -25,7 +25,7 @@ namespace TelegramBotSchool.Commands
                     await ExecuteCommand("", update);
                     break;
                 case "add":
-                    await ExecuteCommand("", update);
+                    await ExecuteCommand("add", update);
                     break;
                 case "delete":
                     await ExecuteCommand("", update);
@@ -44,6 +44,18 @@ namespace TelegramBotSchool.Commands
                 if (message!.Text != "/start" && await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString()) == null)
                 {
                     await ExecuteCommand("WriteDifference", update);
+                }
+
+                if (context.Reminders.Where(x => x.ChatId == message.Chat.Id).Any(x => x.IsFinished == false))
+                {
+                    if (context.Reminders.SingleOrDefault(x => x.ChatId == message.Chat.Id).TextOfReminder == null)
+                    {
+                        await ExecuteCommand("addTextToReminder", update);
+                    }
+                    else
+                    {
+                        await ExecuteCommand("", update);
+                    }
                 }
 
                 if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString()) != null &&

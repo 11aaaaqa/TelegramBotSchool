@@ -15,7 +15,6 @@ namespace TelegramBotSchool.Database
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Reminder>().HasNoKey();
             builder.Entity<User>().HasKey(x => x.ChatId);
         }
     }
