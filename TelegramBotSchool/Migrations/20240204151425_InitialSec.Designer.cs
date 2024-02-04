@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TelegramBotSchool.Database;
 
@@ -11,9 +12,11 @@ using TelegramBotSchool.Database;
 namespace TelegramBotSchool.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240204151425_InitialSec")]
+    partial class InitialSec
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,10 +225,6 @@ namespace TelegramBotSchool.Migrations
 
             modelBuilder.Entity("TelegramBotSchool.Models.Reminder", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<long>("ChatId")
                         .HasColumnType("bigint");
 
@@ -241,8 +240,6 @@ namespace TelegramBotSchool.Migrations
                     b.Property<string>("TextOfReminder")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
 
                     b.ToTable("Reminders");
                 });
