@@ -18,24 +18,6 @@ namespace TelegramBotSchool.Commands
         public async Task Execute(Update update)
         {
             var message = update.Message;
-            if (message != null)
-            {
-                if (message!.Text != "/start" && await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString()) == null)
-                {
-                    await ExecuteCommand("WriteDifference", update);
-                }
-
-                if (message.Text == "/start")
-                {
-                    await ExecuteCommand("Start", update);
-                }
-
-                if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString()) != null && 
-                    context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString())!.IsDifferenceSet == false)
-                {
-
-                }
-            }
 
             switch (update.CallbackQuery?.Data)
             {
@@ -54,6 +36,28 @@ namespace TelegramBotSchool.Commands
                 case "toBack":
                     await ExecuteCommand("", update);
                     break;
+            }
+
+
+            if (message != null)
+            {
+                if (message!.Text != "/start" && await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString()) == null)
+                {
+                    await ExecuteCommand("WriteDifference", update);
+                }
+
+                if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString()) != null &&
+                    context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString())!.IsDifferenceSet == false)
+                {
+                    await ExecuteCommand("change", update);
+                    return;
+                }
+
+                if (message.Text == "/start")
+                {
+                    await ExecuteCommand("Start", update);
+                }
+
             }
         }
         private async Task ExecuteCommand(string commandName, Update update)
