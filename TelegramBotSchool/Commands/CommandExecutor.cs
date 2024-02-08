@@ -54,7 +54,7 @@ namespace TelegramBotSchool.Commands
                     }
                     else
                     {
-                        await ExecuteCommand("", update);
+                        await ExecuteCommand("addTimeToReminder", update);
                     }
                 }
 

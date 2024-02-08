@@ -25,7 +25,7 @@ namespace TelegramBotSchool.Commands
             var toBackMarkup = markup.GetToBack();
             long maxReminderId;
 
-            if (context.Reminders.FirstOrDefault(x => x.ChatId == message.MessageId) == null) 
+            if (context.Reminders.FirstOrDefault(x => x.ChatId == message.Chat.Id) == null) 
                 maxReminderId = 0;
             else
             {
