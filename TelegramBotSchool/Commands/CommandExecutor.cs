@@ -46,7 +46,7 @@ namespace TelegramBotSchool.Commands
                     await ExecuteCommand("WriteDifference", update);
                 }
 
-                if (context.Reminders.Where(x => x.ChatId == message.Chat.Id).Any(x => x.IsFinished == false))
+                if (context.Reminders.Where(x => x.ChatId == message.Chat.Id).Any(x => x.IsFinished == false) && message.Text != "/start")
                 {
                     if (context.Reminders.Where(x => x.IsFinished == false).FirstOrDefault(x => x.ChatId == message.Chat.Id)?.TextOfReminder == "null")
                     {

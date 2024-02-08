@@ -23,6 +23,7 @@ namespace TelegramBotSchool.Commands
             var main = markup.GetMain();
 
             var message = update.Message;
+
             if (await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString()) == null)
             {
                 DateTime utc = DateTime.UtcNow;
@@ -32,6 +33,16 @@ namespace TelegramBotSchool.Commands
             }
             else
             {
+                if (context.Reminders.Where(x => x.IsFinished == false).FirstOrDefault(x => x.ChatId == message.Chat.Id) != null)
+                {
+                    var reminders = context.Reminders.Where(x => x.IsFinished == false).Where(x => x.ChatId == message.Chat.Id);
+                    foreach (var reminder in reminders)
+                    {
+                        context.Reminders.Remove(reminder);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
                 await client.SendTextMessageAsync(message.Chat.Id, "Привет, я могу напомнить тебе, о чем угодно!", replyMarkup: main);
             }
         }
