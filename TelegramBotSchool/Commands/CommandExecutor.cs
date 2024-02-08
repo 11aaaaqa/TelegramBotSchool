@@ -22,7 +22,7 @@ namespace TelegramBotSchool.Commands
             switch (update.CallbackQuery?.Data)
             {
                 case "showAll":
-                    await ExecuteCommand("", update);
+                    await ExecuteCommand("showAll", update);
                     break;
                 case "add":
                     await ExecuteCommand("add", update);
@@ -34,7 +34,7 @@ namespace TelegramBotSchool.Commands
                     await ExecuteCommand("changeDifference", update);
                     break;
                 case "toBack":
-                    await ExecuteCommand("", update);
+                    await ExecuteCommand("toBack", update);
                     break;
             }
 
