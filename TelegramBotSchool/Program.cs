@@ -21,6 +21,7 @@ builder.Services.AddTransient<BaseCommand, ChangeDifferenceCommand>();
 builder.Services.AddTransient<BaseCommand,ChangeDifferenceExecutor>();
 builder.Services.AddTransient<BaseCommand,ShowAllCommand>();
 builder.Services.AddTransient<BaseCommand, AddReminderCommand>();
+builder.Services.AddTransient<BaseCommand,AddTextToReminderCommand>();
 builder.Services.AddTransient<IGetInlineKeyboardMarkup, GetInlineKeyBoardMarkup>();
 
 var app = builder.Build();

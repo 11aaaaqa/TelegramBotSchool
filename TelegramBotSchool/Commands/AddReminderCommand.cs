@@ -33,7 +33,10 @@ namespace TelegramBotSchool.Commands
                     .Max(x => x.ReminderId);
             }
 
-            await context.Reminders.AddAsync(new Reminder{ChatId = message.Chat.Id, IsFinished = false, ReminderId = maxReminderId + 1,Id = Guid.NewGuid()});
+            await context.Reminders.AddAsync(new Reminder
+            {
+                ChatId = message.Chat.Id, IsFinished = false, ReminderId = maxReminderId + 1,Id = Guid.NewGuid(),TextOfReminder = "null"
+            });
 
             await context.SaveChangesAsync();
 
