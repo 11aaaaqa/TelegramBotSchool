@@ -29,8 +29,7 @@ namespace TelegramBotSchool.Commands
                 {
                     context.Reminders.Remove(reminder);
                 }
-
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
             }
 
             var user = context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString());
@@ -38,9 +37,14 @@ namespace TelegramBotSchool.Commands
             if (user.IsDifferenceSet == false)
             {
                 user.IsDifferenceSet = true;
-                await context.SaveChangesAsync();
             }
 
+            if (user.IsDeleteReminder)
+            {
+                user.IsDeleteReminder = false;
+            }
+
+            await context.SaveChangesAsync();
             await client.EditMessageTextAsync(message.Chat.Id, message.MessageId, "Вот все, что я умею", replyMarkup: toMainMarkup);
         }
     }
