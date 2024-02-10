@@ -29,7 +29,6 @@ namespace TelegramBotSchool.Commands
                 {
                     context.Reminders.Remove(reminder);
                 }
-                //await context.SaveChangesAsync();
             }
 
             var user = context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString());
