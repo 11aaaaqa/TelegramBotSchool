@@ -33,7 +33,7 @@ namespace TelegramBotSchool.Commands
                 return;
             }
 
-            await context.Users.AddAsync(new User { ChatId = message.Chat.Id.ToString(), Difference = difference, IsDifferenceSet = true });
+            await context.Users.AddAsync(new User { ChatId = message.Chat.Id.ToString(), Difference = difference, IsDifferenceSet = true, IsDeleteReminder = false});
             await context.SaveChangesAsync();
 
             await client.SendTextMessageAsync(message.Chat.Id, "Разница во времени успешно установлена",

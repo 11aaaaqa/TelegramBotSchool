@@ -40,9 +40,10 @@ namespace TelegramBotSchool.Commands
                     {
                         context.Reminders.Remove(reminder);
                     }
-
-                    await context.SaveChangesAsync();
                 }
+
+                await context.SaveChangesAsync();
+
                 await client.SendTextMessageAsync(message.Chat.Id, "Привет, я могу напомнить тебе, о чем угодно!", replyMarkup: main);
             }
         }
