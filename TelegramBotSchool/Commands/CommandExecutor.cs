@@ -41,11 +41,11 @@ namespace TelegramBotSchool.Commands
 
             if (message != null)
             {
-                //if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString())!.IsDeleteReminder)
-                //{
-                //    await ExecuteCommand("", update);
-                //    return;
-                //}
+                if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString())!.IsDeleteReminder)
+                {
+                    await ExecuteCommand("deleteReminderExecutor", update);
+                    return;
+                }
 
                 if (message!.Text != "/start" && await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString()) == null)
                 {
