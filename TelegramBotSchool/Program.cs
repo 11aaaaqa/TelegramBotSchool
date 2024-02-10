@@ -25,6 +25,7 @@ builder.Services.AddTransient<BaseCommand,AddTextToReminderCommand>();
 builder.Services.AddTransient<BaseCommand,AddTimeToReminderCommand>();
 builder.Services.AddTransient<BaseCommand, GetToBackCommand>();
 builder.Services.AddTransient<BaseCommand, DeleteReminderCommand>();
+builder.Services.AddTransient<BaseCommand, DeleteReminderExecutor>();
 builder.Services.AddTransient<IGetInlineKeyboardMarkup, GetInlineKeyBoardMarkup>();
 
 var app = builder.Build();
