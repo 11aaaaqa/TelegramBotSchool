@@ -8,5 +8,6 @@ namespace TelegramBotSchool.Models
         public string ChatId { get; set; }
         public sbyte Difference { get; set; }
         public bool IsDifferenceSet { get; set; }
+        public bool IsDeleteReminder { get; set; }
     }
 }
