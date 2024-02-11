@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using TelegramBotSchool.Commands;
 using TelegramBotSchool.Database;
@@ -6,6 +7,10 @@ using TelegramBotSchool.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddHangfire(x => x.UseSqlServerStorage(
+    "Server=(LocalDB)\\MSSQLLocalDB;Database=TelegramBotSchool;Integrated Security=true"));
+builder.Services.AddHangfireServer();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

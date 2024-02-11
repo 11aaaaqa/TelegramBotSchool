@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.SqlServer.Server;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using TelegramBotSchool.Database;
+using TelegramBotSchool.Models;
 using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
@@ -53,6 +55,10 @@ namespace TelegramBotSchool.Commands
 
                 await context.SaveChangesAsync();
 
+                var user = await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString());
+                BackgroundJob.Schedule(() => MethodToRun(reminder, message.Chat.Id, reminder.TextOfReminder),
+                    reminderTime - DateTime.UtcNow.AddHours(user.Difference));
+
                 await client.SendTextMessageAsync(message.Chat.Id, "Напоминание успешно добавлено",
                     replyMarkup: mainMarkup);
             }
@@ -60,6 +66,17 @@ namespace TelegramBotSchool.Commands
             {
                 await client.SendTextMessageAsync(message.Chat.Id, "Время должно быть в будущем", replyMarkup:toBackMarkup);
             }
+        }
+
+        public async Task MethodToRun(Reminder reminder, long chatId,string textOfReminder)
+        {
+            await client.SendTextMessageAsync(chatId, textOfReminder);
+
+            var remndr = await context.Reminders.SingleOrDefaultAsync(x => x.Id == reminder.Id);
+
+            context.Reminders.Remove(remndr);
+
+            await context.SaveChangesAsync();
         }
     }
 }

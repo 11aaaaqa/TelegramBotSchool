@@ -41,7 +41,8 @@ namespace TelegramBotSchool.Commands
 
             if (message != null)
             {
-                if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString())!.IsDeleteReminder)
+                var user = await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString());
+                if (user != null && user.IsDeleteReminder)
                 {
                     await ExecuteCommand("deleteReminderExecutor", update);
                     return;
