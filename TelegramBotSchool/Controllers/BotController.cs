@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Telegram.Bot;
+﻿using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;
 using TelegramBotSchool.Commands;
 
@@ -24,11 +22,7 @@ namespace TelegramBotSchool.Controllers
             {
                 return Ok();
             }
-
-            //if (update.Message.Text != null)
-            //{
             await executor.Execute(update);
-            //}
 
             return Ok();
         }
