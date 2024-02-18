@@ -2,9 +2,9 @@
 
 namespace TelegramBotSchool.Commands
 {
-    public abstract class BaseCommand
+    public interface IBaseCommand
     {
-        public abstract string Name { get; }
-        public abstract Task ExecuteAsync(Update update);
+        public string Name { get; }
+        public Task ExecuteAsync(Update update);
     }
 }

@@ -6,7 +6,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class AddTextToReminderCommand :BaseCommand
+    public class AddTextToReminderCommand : IBaseCommand
     {
         private readonly TelegramBotClient client;
         private readonly ApplicationDbContext context;
@@ -17,8 +17,8 @@ namespace TelegramBotSchool.Commands
             this.context = context;
             this.markup = markup;
         }
-        public override string Name => "addTextToReminder";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "addTextToReminder";
+        public async Task ExecuteAsync(Update update)
         {
             var message = update.Message;
             var toBackMarkup = markup.GetToBack();

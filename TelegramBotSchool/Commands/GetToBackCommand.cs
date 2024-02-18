@@ -5,7 +5,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class GetToBackCommand : BaseCommand
+    public class GetToBackCommand : IBaseCommand
     {
         private readonly TelegramBotClient client;
         private readonly IGetInlineKeyboardMarkup markup;
@@ -16,8 +16,8 @@ namespace TelegramBotSchool.Commands
             this.markup = markup;
             this.context = context;
         }
-        public override string Name => "toBack";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "toBack";
+        public async Task ExecuteAsync(Update update)
         {
             var message = update.Message ?? update.CallbackQuery.Message;
             var toMainMarkup = markup.GetMain();

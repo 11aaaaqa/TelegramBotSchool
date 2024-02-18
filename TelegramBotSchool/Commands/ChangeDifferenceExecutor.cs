@@ -7,7 +7,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class ChangeDifferenceExecutor : BaseCommand
+    public class ChangeDifferenceExecutor : IBaseCommand
     {
         private readonly ApplicationDbContext context;
         private readonly TelegramBotClient client;
@@ -18,8 +18,8 @@ namespace TelegramBotSchool.Commands
             client = bot.GetBot();
             this.markup = markup;
         }
-        public override string Name => "change";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "change";
+        public async Task ExecuteAsync(Update update)
         {
             var message = update.Message;
             var toBackMarkup = markup.GetToBack();

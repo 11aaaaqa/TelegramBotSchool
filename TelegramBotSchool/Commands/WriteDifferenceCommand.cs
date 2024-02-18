@@ -6,7 +6,7 @@ using User = TelegramBotSchool.Models.User;
 
 namespace TelegramBotSchool.Commands
 {
-    public class WriteDifferenceCommand : BaseCommand
+    public class WriteDifferenceCommand : IBaseCommand
     {
         private readonly TelegramBotClient client;
         private readonly ApplicationDbContext context;
@@ -17,8 +17,8 @@ namespace TelegramBotSchool.Commands
             client = bot.GetBot();
             this.markup = markup;
         }
-        public override string Name => "WriteDifference";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "WriteDifference";
+        public async Task ExecuteAsync(Update update)
         {
             var main = markup.GetMain();
             var message = update.Message;

@@ -6,7 +6,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class DeleteReminderExecutor : BaseCommand
+    public class DeleteReminderExecutor : IBaseCommand
     {
         private readonly ApplicationDbContext context;
         private readonly TelegramBotClient client;
@@ -19,9 +19,9 @@ namespace TelegramBotSchool.Commands
             this.markup = markup;
         }
 
-        public override string Name => "deleteReminderExecutor";
+        public string Name => "deleteReminderExecutor";
 
-        public override async Task ExecuteAsync(Update update)
+        public async Task ExecuteAsync(Update update)
         {
             var message = update.Message;
             var toBackMarkup = markup.GetToBack();

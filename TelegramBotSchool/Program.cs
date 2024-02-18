@@ -20,17 +20,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(
     "Server=(LocalDB)\\MSSQLLocalDB;Database=TelegramBotSchool;Integrated Security=true"));
 builder.Services.AddSingleton<Bot>();
 builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
-builder.Services.AddTransient<BaseCommand, StartCommand>();
-builder.Services.AddTransient<BaseCommand, WriteDifferenceCommand>();
-builder.Services.AddTransient<BaseCommand, ChangeDifferenceCommand>();
-builder.Services.AddTransient<BaseCommand,ChangeDifferenceExecutor>();
-builder.Services.AddTransient<BaseCommand,ShowAllCommand>();
-builder.Services.AddTransient<BaseCommand, AddReminderCommand>();
-builder.Services.AddTransient<BaseCommand,AddTextToReminderCommand>();
-builder.Services.AddTransient<BaseCommand,AddTimeToReminderCommand>();
-builder.Services.AddTransient<BaseCommand, GetToBackCommand>();
-builder.Services.AddTransient<BaseCommand, DeleteReminderCommand>();
-builder.Services.AddTransient<BaseCommand, DeleteReminderExecutor>();
+builder.Services.AddTransient<IBaseCommand, StartCommand>();
+builder.Services.AddTransient<IBaseCommand, WriteDifferenceCommand>();
+builder.Services.AddTransient<IBaseCommand, ChangeDifferenceCommand>();
+builder.Services.AddTransient<IBaseCommand, ChangeDifferenceExecutor>();
+builder.Services.AddTransient<IBaseCommand, ShowAllCommand>();
+builder.Services.AddTransient<IBaseCommand, AddReminderCommand>();
+builder.Services.AddTransient<IBaseCommand, AddTextToReminderCommand>();
+builder.Services.AddTransient<IBaseCommand, AddTimeToReminderCommand>();
+builder.Services.AddTransient<IBaseCommand, GetToBackCommand>();
+builder.Services.AddTransient<IBaseCommand, DeleteReminderCommand>();
+builder.Services.AddTransient<IBaseCommand, DeleteReminderExecutor>();
 builder.Services.AddTransient<IGetInlineKeyboardMarkup, GetInlineKeyBoardMarkup>();
 
 var app = builder.Build();

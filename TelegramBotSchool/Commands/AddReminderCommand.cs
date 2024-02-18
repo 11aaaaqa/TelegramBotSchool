@@ -6,7 +6,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class AddReminderCommand : BaseCommand
+    public class AddReminderCommand : IBaseCommand
     {
         private readonly TelegramBotClient client;
         private readonly IGetInlineKeyboardMarkup markup;
@@ -18,8 +18,8 @@ namespace TelegramBotSchool.Commands
             this.markup = markup;
             this.context = context;
         }
-        public override string Name => "add";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "add";
+        public async Task ExecuteAsync(Update update)
         {
             var message = update.CallbackQuery.Message;
             var toBackMarkup = markup.GetToBack();

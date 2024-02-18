@@ -6,7 +6,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class StartCommand : BaseCommand
+    public class StartCommand : IBaseCommand
     {
         private readonly TelegramBotClient client;
         private readonly ApplicationDbContext context;
@@ -17,8 +17,8 @@ namespace TelegramBotSchool.Commands
             client = bot.GetBot();
             this.markup = markup;
         }
-        public override string Name => "Start";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "Start";
+        public async Task ExecuteAsync(Update update)
         {
             var main = markup.GetMain();
 

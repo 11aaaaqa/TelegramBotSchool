@@ -7,7 +7,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class DeleteReminderCommand : BaseCommand
+    public class DeleteReminderCommand : IBaseCommand
     {
         private readonly TelegramBotClient client;
         private readonly IGetInlineKeyboardMarkup markup;
@@ -18,8 +18,8 @@ namespace TelegramBotSchool.Commands
             this.markup = markup;
             this.context = context;
         }
-        public override string Name => "delete";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "delete";
+        public async Task ExecuteAsync(Update update)
         {
             var toBackMarkup = markup.GetToBack();
             var message = update.CallbackQuery.Message;

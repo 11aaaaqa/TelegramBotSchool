@@ -6,7 +6,7 @@ using TelegramBotSchool.Services;
 
 namespace TelegramBotSchool.Commands
 {
-    public class ShowAllCommand : BaseCommand
+    public class ShowAllCommand : IBaseCommand
     {
         private readonly ApplicationDbContext context;
         private readonly TelegramBotClient client;
@@ -17,8 +17,8 @@ namespace TelegramBotSchool.Commands
             client = bot.GetBot();
             this.markup = markup;
         }
-        public override string Name => "showAll";
-        public override async Task ExecuteAsync(Update update)
+        public string Name => "showAll";
+        public async Task ExecuteAsync(Update update)
         {
             var toBackMarkup = markup.GetToBack();
             var message = update.CallbackQuery.Message;

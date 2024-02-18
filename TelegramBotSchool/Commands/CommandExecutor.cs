@@ -6,13 +6,12 @@ namespace TelegramBotSchool.Commands
 {
     public class CommandExecutor : ICommandExecutor
     {
-        private readonly List<BaseCommand> commands;
-        private BaseCommand lastCommand;
+        private readonly List<IBaseCommand> commands;
         private ApplicationDbContext context;
 
         public CommandExecutor(IServiceProvider provider, ApplicationDbContext context)
         {
-            commands = provider.GetServices<BaseCommand>().ToList();
+            commands = provider.GetServices<IBaseCommand>().ToList();
             this.context = context;
         }
         public async Task Execute(Update update)
@@ -81,7 +80,7 @@ namespace TelegramBotSchool.Commands
         }
         private async Task ExecuteCommand(string commandName, Update update)
         {
-            lastCommand = commands.First(x => x.Name == commandName);
+            var lastCommand = commands.Single(x => x.Name == commandName);
             await lastCommand.ExecuteAsync(update);
         }
     }
