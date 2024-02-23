@@ -75,7 +75,6 @@ namespace TelegramBotSchool.Commands
                 {
                     await ExecuteCommand("Start", update);
                 }
-
             }
         }
         private async Task ExecuteCommand(string commandName, Update update)

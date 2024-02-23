@@ -7,7 +7,7 @@ using TelegramBotSchool.Services;
 namespace TelegramBotSchool.Commands
 {
     public class StartCommand : IBaseCommand
-    {
+    {   
         private readonly TelegramBotClient client;
         private readonly ApplicationDbContext context;
         private readonly IGetInlineKeyboardMarkup markup;
