@@ -54,6 +54,11 @@ namespace TelegramBotSchool.Commands
 
             context.Reminders.Remove(reminder);
 
+            var scheduledReminder = await context.ScheduledReminders.SingleOrDefaultAsync(x => x.ReminderId == reminder.Id);
+            BackgroundJob.Delete(scheduledReminder.JobId);
+
+            context.ScheduledReminders.Remove(scheduledReminder);
+
             var user = await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString());
             user.IsDeleteReminder = false;
 
