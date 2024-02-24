@@ -47,25 +47,25 @@ namespace TelegramBotSchool.Commands
                     return;
                 }
 
-                if (message!.Text != "/start" && await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString()) == null)
+                if (message!.Text != "/start" && user == null)
                 {
                     await ExecuteCommand("WriteDifference", update);
                 }
 
-                if (context.Reminders.Where(x => x.ChatId == message.Chat.Id).Any(x => x.IsFinished == false) && message.Text != "/start")
+                if (context.Reminders.Where(x => x.ChatId == message.Chat.Id).Any(x => x.IsFinished == false))
                 {
                     if (context.Reminders.Where(x => x.IsFinished == false).FirstOrDefault(x => x.ChatId == message.Chat.Id)?.TextOfReminder == "null")
                     {
                         await ExecuteCommand("addTextToReminder", update);
+                        return;
                     }
-                    else
                     {
                         await ExecuteCommand("addTimeToReminder", update);
+                        return;
                     }
                 }
 
-                if (context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString()) != null &&
-                    context.Users.SingleOrDefault(x => x.ChatId == message.Chat.Id.ToString())!.IsDifferenceSet == false)
+                if (user != null && user.IsDifferenceSet == false)
                 {
                     await ExecuteCommand("change", update);
                     return;
