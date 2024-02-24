@@ -11,6 +11,7 @@ namespace TelegramBotSchool.Database
 
         public DbSet<User> Users { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
+        public DbSet<ScheduledReminder> ScheduledReminders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
