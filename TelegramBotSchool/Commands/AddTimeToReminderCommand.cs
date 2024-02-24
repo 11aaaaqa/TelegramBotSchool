@@ -53,11 +53,13 @@ namespace TelegramBotSchool.Commands
 
                 reminder.ReminderTime = reminderTime;
 
-                await context.SaveChangesAsync();
-
                 var user = await context.Users.SingleOrDefaultAsync(x => x.ChatId == message.Chat.Id.ToString());
-                BackgroundJob.Schedule(() => MethodToRun(reminder, message.Chat.Id, reminder.TextOfReminder),
+                var jobId = BackgroundJob.Schedule(() => MethodToRun(reminder, message.Chat.Id, reminder.TextOfReminder),
                     reminderTime - DateTime.UtcNow.AddHours(user.Difference));
+
+                await context.ScheduledReminders.AddAsync(new ScheduledReminder{JobId = jobId, ReminderId = reminder.Id});
+
+                await context.SaveChangesAsync();
 
                 await client.SendTextMessageAsync(message.Chat.Id, "Напоминание успешно добавлено",
                     replyMarkup: mainMarkup);
@@ -74,6 +76,9 @@ namespace TelegramBotSchool.Commands
 
             var remndr = await context.Reminders.SingleOrDefaultAsync(x => x.Id == reminder.Id);
 
+            var scheduledReminder = await context.ScheduledReminders.SingleOrDefaultAsync(x => x.ReminderId == reminder.Id);
+            
+            context.ScheduledReminders.Remove(scheduledReminder);
             context.Reminders.Remove(remndr);
 
             await context.SaveChangesAsync();
