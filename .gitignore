@@ -3,8 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-Services/Bot.cs
-Services/Bot2.cs
+Bot2.cs
 
 
 # User-specific files
